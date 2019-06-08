@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 import Login from '@/views/Login.vue'
 import Home from '@/views/Home.vue'
+import Welcome from '@/views/Welcome.vue'
+import User from '@/views/users/User.vue'
 
 // 一定要记得use
 Vue.use(VueRouter)
@@ -25,7 +27,23 @@ export default new VueRouter({
     {
       name: 'Home',
       path: '/home',
-      component: Home
+      component: Home,
+      // 为welcome页面做请求重定向
+      redirect: { name: 'Welcome' },
+      // 因为要将Welcome里面的内容展示到Home中的某一组建
+      // 所以要用嵌套路由做
+      children: [
+        {
+          name: 'Welcome',
+          path: 'welcome',
+          component: Welcome
+        },
+        {
+          name: 'User',
+          path: 'user',
+          component: User
+        }
+      ]
     }
   ]
 })

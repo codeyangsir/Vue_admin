@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <span style=" position: fixed; margin-left:300px">F5刷新一下有惊喜</span>
     <!-- 画布 -->
     <canvas id="canvas" style="background:#111"></canvas>
     <div class="container">
@@ -19,7 +20,7 @@
         </el-form-item>
         <el-form-item>
             <!-- （）里面传实参名字固定LoginForm-->
-          <el-button type="primary" class="login-btn" @click='loginSubmit("LoginForm")'>登陆</el-button>
+          <el-button type="primary" class="login-btn" @click='loginSubmit("LoginForm")' @keyup.enter.native='loginSubmit'>登陆</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -27,7 +28,8 @@
 </template>
 <script>
 
-import { login } from '@/api/index.js'
+import { login } from '@/api/users_index.js'
+// 特效代码雨
 window.onload = function () {
   // 获取画布对象
   var canvas = document.getElementById('canvas')
@@ -49,7 +51,6 @@ window.onload = function () {
   for (var i = 0; i < colunms; i++) {
     drops.push(0)
   }
-
   // 运动的文字
   var str = 'javascript html5 canvas'
   // 4:fillText(str,x,y);原理就是去更改y的坐标位置
@@ -74,14 +75,12 @@ window.onload = function () {
       drops[i]++
     }
   }
-
   function randColor () {
     var r = Math.floor(Math.random() * 256)
     var g = Math.floor(Math.random() * 256)
     var b = Math.floor(Math.random() * 256)
     return 'rgb(' + r + ',' + g + ',' + b + ')'
   }
-
   draw()
   setInterval(draw, 30)
 }
@@ -121,6 +120,9 @@ export default {
           login(this.LoginForm)
             .then((result) => {
               if (result.meta.status === 200) {
+                console.log(result)
+                // 将token数据存储到本地
+                localStorage.setItem('itcastpro_token', result.data.token)
                 //   要进行路由的跳转
                 this.$router.push({ name: 'Home' })
               } else {
