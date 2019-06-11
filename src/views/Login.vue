@@ -35,6 +35,7 @@ window.onload = function () {
   var canvas = document.getElementById('canvas')
   // 获取画布的上下文
   var context = canvas.getContext('2d')
+  // console.log(getContext('2d'))
   // 获取浏览器屏幕的宽度和高度
   var W = window.innerWidth
   var H = window.innerHeight
@@ -75,12 +76,12 @@ window.onload = function () {
       drops[i]++
     }
   }
-  function randColor () {
-    var r = Math.floor(Math.random() * 256)
-    var g = Math.floor(Math.random() * 256)
-    var b = Math.floor(Math.random() * 256)
-    return 'rgb(' + r + ',' + g + ',' + b + ')'
-  }
+  // function randColor () {
+  //   var r = Math.floor(Math.random() * 256)
+  //   var g = Math.floor(Math.random() * 256)
+  //   var b = Math.floor(Math.random() * 256)
+  //   return 'rgb(' + r + ',' + g + ',' + b + ')'
+  // }
   draw()
   setInterval(draw, 30)
 }

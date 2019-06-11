@@ -26,6 +26,7 @@ export const getAllRoleList = () => {
 }
 
 // 授权角色提交
+// 分配用户角色提交
 export const grantRole = (id, rid) => {
   return axios.put(`users/${id}/role`, { rid: rid })
     .then((result) => {
@@ -39,4 +40,39 @@ export const addUser = (obj) => {
     .then((result) => {
       return result.data
     })
+}
+
+// 删除指定角色的指定权限
+// delete:--看接口文档:删除角色指定权限
+export const removeRightByUserId = (roleid, rightid) => {
+  return axios.delete(`roles/${roleid}/rights/${rightid}`)
+
+  // 错误方发
+  // axios({
+  //   type:'delete',
+  //   url:`roles/${roleid}/rights/${rightid}`
+  // })
+}
+
+// 添加角色
+export const addRole = (params) => {
+  return axios({
+    method: 'post',
+    url: 'roles',
+    data: params
+  })
+}
+
+// 实现角色授权提交，看接口文档操作
+// - 请求路径：roles/:roleId/rights
+// - 请求方法：post
+// - 请求参数roleld,rids
+export const grantRoleSubmit = (roleid, ids) => {
+  return axios({
+    // ids是数组,后期出来可能会报错
+    method: 'post',
+    // url: `roles/${'roleld'}/rights`,
+    url: `roles/${roleid}/rights`,
+    data: { rids: ids }
+  })
 }

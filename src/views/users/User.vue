@@ -206,6 +206,7 @@ export default {
     serachUser () {
       // init()方法里面已经做过取数据的方法了
       this.init()
+      console.log(this.$refs['roleS'])
     },
     // 新增用户提交
     addSubmit () {
@@ -301,7 +302,7 @@ export default {
       // 这个方法验证完毕之后，会调用回调函数，这个回调有一个参数valid,它就是是否通过验证的标识
       // 如果通过验证，就返回true,否则返回 False
       // this.$refs.editForm.validate(valid => {
-      this.$ref.editForm.validate(valid => {
+      this.$refs.editForm.validate(valid => {
         if (valid) {
           // 实现编辑提交请求
           editUser(this.editForm).then(result => {
